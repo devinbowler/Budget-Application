@@ -43,7 +43,7 @@
                         <input type="radio" name="day" value="Wednesday" id="wednesday">WD</button>
                         <input type="radio" name="day" value="Thursday" id="thursday">TH</button>
                         <input type="radio" name="day" value="Friday" id="friday">FR</button>
-                        <input type="radio" name="day" value="Saterday" id="saterday">SA</button>
+                        <input type="radio" name="day" value="Saterday" id="saturday">SA</button>
                     </form>
                 </div>
         </fieldset>
@@ -105,6 +105,9 @@
     <form id="month">
         <textarea id="monthTest" readonly>Budget Application</textarea>
     </form>
+
+    <button onclick="nextMonth()" type="button" id="arrowRight"></button>
+    <button onclick="lastMonth()" type="button" id="arrowLeft"></button>
 
     <div class="grid-container">
         <div id="day1"><textarea readonly id="num1"></textarea></div>
