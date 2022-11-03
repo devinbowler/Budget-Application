@@ -131,12 +131,12 @@ var June = [0, 0, 0, 1, 2, 3, 4,
             26, 27, 28, 29, 30, 0, 0,
             0, 0, 0, 0,0, 0, 0];
 
-var July = [0, 0, 0, 0, 0, 1, 2,
-            3, 4, 5, 6, 7, 8, 9,
-            10, 11, 12, 13, 14, 15, 16,
-            17, 18, 19, 20, 21, 22, 23,
-            24, 25 ,26, 27, 28, 29, 30, 
-            31, 0, 0, 0, 0, 0, 0];
+var July = [0, 0, 0, 0, 0, 1, 
+            2, 3, 4, 5, 6, 7, 8,
+            9, 10, 11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20, 21, 22,
+            23, 24, 25 ,26, 27, 28, 29, 
+            30, 31, 0, 0, 0, 0, 0, 0];
 
 var August = [0, 1, 2, 3, 4, 5, 6,
               7, 8, 9, 10, 11, 12, 13,
@@ -210,9 +210,9 @@ var SundayDays = [5, 4, 4, 4, 5, 4, 5, 4, 4, 5, 4, 4];
 var MondayDays = [5, 4, 4, 4, 5, 4, 4, 5, 4, 5, 4, 4];
 var TuesdayDays = [4, 4, 5, 4, 5, 4, 4, 5, 4, 4, 5, 4];
 var WednesdayDays = [4, 4, 5, 4, 4, 5, 4, 5, 4, 4, 5, 4];
-var ThursdayDays = [4, 4, 5, 4, 4, 5, 4, 4, 4, 4, 4, 5];
+var ThursdayDays = [4, 4, 5, 4, 4, 5, 4, 4, 5, 4, 4, 5];
 var FridayDays = [4, 4, 4, 5, 4, 4, 5, 4, 5, 4, 4, 5];
-var SaturdayDays = [5, 4, 4, 5, 4, 4, 5, 4, 5, 5, 4, 5];
+var SaturdayDays = [5, 4, 4, 5, 4, 4, 5, 4, 4, 5, 4, 5];
 
 
 
@@ -229,8 +229,10 @@ function closeOverlay() {
 
 
 
-var globalMonth = 1;
+var globalMonth = currentMonth;
 var next = 0;
+var firstIncrement = 0;
+var currentMonth = parseInt((0), 10);
 
 function compute() {
     var weeklyIncome = parseInt(document.getElementById("weekly-income").value, 10);
@@ -269,9 +271,9 @@ function compute() {
     }
 
     if (date[5] == 0){
-        var currentMonth = month2;
+        currentMonth = parseInt((month2), 10);
     } else {
-        currentMonth = month1 + month2;
+        currentMonth = parseInt((month1 + month2), 10);
     }
 
     globalMonth = parseInt((currentMonth), 10);
@@ -280,39 +282,52 @@ function compute() {
     computeMonth(currentMonth, updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, currentDay, next);
 }
 
-function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmergency, emergency, weekUpdate, Day, daysIndex, weekdaysNum, boolean, monthDiff) {
+function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmergency, emergency, weekUpdate, Day, daysIndex, weekdaysNum, boolean, monthDiff, month) {
     switch (SelectedDay) {
         case "sunday":
             var i = 6;
+            var firstI = 1;
             Day = daysIndex + 1;
             
-            if (Day > 1 && Day < 8){
+            if (Day > 0 && Day < 8){
                 i = 1;
+                firstI = 0;
             }
             if (Day > 7 && Day < 15){
                 i = 2;
+                firstI = 1;
             }
             if (Day > 14 && Day < 22){
-                i = 3;
+                i = 3; 
+                firstI = 2;
             }
             if (Day > 21 && Day < 29){
                 i = 4;
+                firstI = 3;
             }
             if (Day > 28 && Day < 36){
                 i = 5;
+                firstI = 4;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (SundayDays[currentMonth - 1] - firstI);
+            }
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
                 }
             }
+
+ 
 
            
     
@@ -333,41 +348,56 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
                     i++;
                }
            }
+      
         break;
 
         case "monday":
             var i = 6;
+            var firstI = 1;
             Day = daysIndex + 1;
-            if (Day == 1){
+            
+            if (Day > 0 && Day < 2){
                 i = 0;
+                firstI = 0;
             }
             if (Day > 1 && Day < 9){
                 i = 1;
+                firstI = 1;
             }
             if (Day > 8 && Day < 16){
                 i = 2;
+                firstI = 2;
             }
             if (Day > 15 && Day < 23){
                 i = 3;
+                firstI = 3;
             }
             if (Day > 22 && Day < 30){
                 i = 4;
+                firstI = 4;
             }
             if (Day > 29 && Day < 37){
                 i = 5;
+                firstI = 5;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (MondayDays[currentMonth - 1] - firstI);
+            }
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
                 }
             }
+
     
             if(document.getElementById('weekly').checked){
                 for (i; i < 6; i++){
@@ -389,35 +419,48 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
         break;
 
         case "tuesday":
-            Day = daysIndex;
-
-            i = 6;
-
-            if (Day == 1){
+            var i = 6;
+            var firstI = 1;
+            Day = daysIndex + 1;
+            
+            if (Day > 0 && Day < 3){
                 i = 0;
+                firstI = 0;
             }
-            if (Day > 1 && Day < 7){
+            if (Day > 2 && Day < 10){
                 i = 1;
+                firstI = 1;
             }
-            if (Day > 8 && Day < 15){
+            if (Day > 9 && Day < 17){
                 i = 2;
+                firstI = 2;
             }
-            if (Day > 15 && Day < 22){
+            if (Day > 16 && Day < 24){
                 i = 3;
+                firstI = 3;
             }
-            if (Day > 22 && Day < 29){
+            if (Day > 23 && Day < 31){
                 i = 4;
+                firstI = 4;
             }
-            if (Day > 29 && Day < 36){
+            if (Day > 30 && Day < 38){
                 i = 5;
+                firstI = 5;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (TuesdayDays[currentMonth - 1] - firstI);
+            }
+
+            console.log(currentMonth, firstIncrement, firstI, i);
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
@@ -444,41 +487,51 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
         break;
 
         case "wednesday":
-            Day = daysIndex;
-
-            i = 6;
-
-            if (Day == 2){
+            var i = 6;
+            var firstI = 1;
+            Day = daysIndex + 1;
+            
+            if (Day > 0 && Day < 4){
                 i = 0;
+                firstI = 0;
             }
-            if (Day > 2 && Day < 8){
+            if (Day > 3 && Day < 11){
                 i = 1;
+                firstI = 1;
             }
-            if (Day > 8 && Day < 15){
+            if (Day > 10 && Day < 18){
                 i = 2;
+                firstI = 2;
             }
-            if (Day > 15 && Day < 22){
+            if (Day > 17 && Day < 25){
                 i = 3;
+                firstI = 3;
             }
-            if (Day > 22 && Day < 29){
+            if (Day > 24 && Day < 32){
                 i = 4;
+                firstI = 4;
             }
-            if (Day > 29 && Day < 36){
+            if (Day > 31 && Day < 39){
                 i = 5;
+                firstI = 5;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (WednesdayDays[currentMonth - 1] - firstI);
+            }
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
                 }
             }
-
           
     
             if(document.getElementById('weekly').checked){
@@ -501,38 +554,46 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
         break;
 
         case "thursday":
-            Day = daysIndex;
-
-            i = 6;
-
-            if (Day == 3){
+            var i = 6;
+            var firstI = 1;
+            Day = daysIndex + 1;
+            
+            if (Day > 0 && Day < 5){
                 i = 0;
+                firstI = 0;
             }
-            if (Day > 3 && Day < 7){
+            if (Day > 4 && Day < 12){
                 i = 1;
+                firstI = 1;
             }
-            if (Day < 5){
-                i = 1;
-            }
-            if (Day > 8 && Day < 15){
+            if (Day > 11 && Day < 19){
                 i = 2;
+                firstI = 2;
             }
-            if (Day > 15 && Day < 22){
+            if (Day > 18 && Day < 26){
                 i = 3;
+                firstI = 3;
             }
-            if (Day > 22 && Day < 29){
+            if (Day > 25 && Day < 33){
                 i = 4;
+                firstI = 4;
             }
-            if (Day > 29 && Day < 36){
+            if (Day > 32 && Day < 40){
                 i = 5;
+                firstI = 5;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (ThursdayDays[currentMonth - 1] - firstI);
+            }
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
@@ -559,38 +620,46 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
         break;
 
         case "friday":
-            Day = daysIndex;
-
-            i = 6;
-
-            if (Day == 4){
+            var i = 6;
+            var firstI = 1;
+            Day = daysIndex + 1;
+            
+            if (Day > 0 && Day < 6){
                 i = 0;
+                firstI = 0;
             }
-            if (Day > 4 && Day < 7){
+            if (Day > 5 && Day < 13){
                 i = 1;
+                firstI = 1;
             }
-            if (Day < 6){
-                i = 1;
-            }
-            if (Day > 8 && Day < 15){
+            if (Day > 12 && Day < 20){
                 i = 2;
+                firstI = 2;
             }
-            if (Day > 15 && Day < 22){
+            if (Day > 19 && Day < 27){
                 i = 3;
+                firstI = 3;
             }
-            if (Day > 22 && Day < 29){
+            if (Day > 26 && Day < 34){
                 i = 4;
+                firstI = 4;
             }
-            if (Day > 29 && Day < 36){
+            if (Day > 33 && Day < 41){
                 i = 5;
+                firstI = 5;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (FridayDays[currentMonth - 1] - firstI);
+            }
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
@@ -617,43 +686,53 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
         break;
 
         case "saturday":
-            Day = daysIndex;
-
-            i = 6;
-
-            if (Day == 5){
+            var i = 6;
+            var firstI = 1;
+            Day = daysIndex + 1;
+            
+            if (Day > 0 && Day < 7){
                 i = 0;
+                firstI = 0;
             }
-            if (Day > 5 && Day < 7){
+            if (Day > 6 && Day < 14){
                 i = 1;
+                firstI = 1;
             }
-            if (Day < 7){
-                i = 1;
-            }
-            if (Day > 8 && Day < 15){
+            if (Day > 13 && Day < 21){
                 i = 2;
+                firstI = 2;
             }
-            if (Day > 15 && Day < 22){
+            if (Day > 20 && Day < 28){
                 i = 3;
+                firstI = 3;
             }
-            if (Day > 22 && Day < 29){
+            if (Day > 27 && Day < 35){
                 i = 4;
+                firstI = 4;
             }
-            if (Day > 29 && Day < 36){
+            if (Day > 34 && Day < 42){
                 i = 5;
+                firstI = 5;
             }
-            if (boolean == 1){
+            if (boolean == 1 && globalMonth != currentMonth){
                 i = weekdaysNum;
             }
 
-            if (monthDiff == 1){
-                var increment = 4 - i;
-                for (var l = 0; l < increment; l++){
+            if (boolean == 0){
+                firstIncrement = (SaturdayDays[currentMonth - 1] - firstI);
+            }
+
+
+
+            if (boolean == 1 && currentMonth != globalMonth) {
+                for (var l = 0; l < firstIncrement; l++){
                     newCheckings += weekUpdate;
                     newSavings += savings;
                     newEmergency += emergency;
                 }
             }
+
+            console.log(SaturdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i);
     
             if(document.getElementById('weekly').checked){
                 for (i; i < 6; i++){
@@ -681,6 +760,7 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
 function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, boolean, monthDiff){
     if (Month == 1){
         monthTest.value = "January 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -709,13 +789,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, month);
             }
         }
     }
 
     if (Month == 2){
         monthTest.value = "Febuary 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -744,28 +825,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = SundayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = MondayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = TuesdayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = WednesdayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = ThursdayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = FridayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = SaturdayDays[0] * monthDiff;
+                        for (var h = currentMonth; h < 1; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -774,13 +872,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 3){
         monthTest.value = "March 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -813,40 +912,40 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                 }
 
                  if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        for (var h = 0; h < 2; h++){
-                        increment += parseInt((SundayDays[h], 10));
-                    }
+                        for (var h = currentMonth; h < 2; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        for (var h = 0; h < 2; h++){
-                            increment += parseInt((MondayDays[h], 10));
+                        for (var h = currentMonth; h < 2; h++){
+                            increment += parseInt((MondayDays[h]));
                         }
                     }
                     if (l == 2){
-                        for (var h = 0; h < 2; h++){
-                            increment += parseInt((TuesdayDays[h], 10));
+                        for (var h = currentMonth; h < 2; h++){
+                            increment += parseInt((TuesdayDays[h]));
                         }
                     }
                     if (l == 3){
-                        for (var h = 0; h < 2; h++){
-                            increment += parseInt((WednesdayDays[h], 10));
+                        for (var h = currentMonth; h < 2; h++){
+                            increment += parseInt((WednesdayDays[h]));
                         }
                     }
                     if (l == 4){
-                        for (var h = 0; h < 2; h++){
-                            increment += parseInt((ThursdayDays[h], 10));
+                        for (var h = currentMonth; h < 2; h++){
+                            increment += parseInt((ThursdayDays[h]));
                         }
                     }
                     if (l == 5){
-                        for (var h = 0; h < 2; h++){
-                            increment += parseInt((FridayDays[h], 10));
+                        for (var h = currentMonth; h < 2; h++){
+                            increment += parseInt((FridayDays[h]));
                         }
                     }
                     if (l == 6){
-                        for (var h = 0; h < 2; h++){
-                            increment += parseInt((SaturdayDays[h], 10));
+                        for (var h = currentMonth; h < 2; h++){
+                            increment += parseInt((SaturdayDays[h]));
                         }
                     }
                  
@@ -860,13 +959,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 4){
         monthTest.value = "April 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -894,29 +994,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                 else if (weekdayNum > 5) {
                     newI = 0;
                 }
+                console.log(newI);
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[2] * monthDiff), 10);
+                        for (var h = currentMonth; h < 3; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[2] * monthDiff), 10);
+                        for (var h = currentMonth; h < 3; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[2] * monthDiff), 10);
+                        for (var h = currentMonth; h < 3; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[2] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 3; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[2] * monthDiff), 10);
+                        for (var h = currentMonth; h < 3; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[2] * monthDiff), 10);
+                        for (var h = currentMonth; h < 3; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[2] * monthDiff), 10);
+                        for (var h = currentMonth; h < 3; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
 
                     console.log(increment);
 
@@ -927,13 +1043,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 5){
         monthTest.value = "May 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -958,28 +1075,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                 var newI = 0;
                 
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[3] * monthDiff), 10);
+                        for (var h = currentMonth; h < 4; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[3] * monthDiff), 10);
+                        for (var h = currentMonth; h < 4; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[3] * monthDiff), 10);
+                        for (var h = currentMonth; h < 4; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[3] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 4; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[3] * monthDiff), 10);
+                        for (var h = currentMonth; h < 4; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[3] * monthDiff), 10);
+                        for (var h = currentMonth; h < 4; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[3] * monthDiff), 10);
+                        for (var h = currentMonth; h < 4; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -987,16 +1121,15 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                         updatedEmergency += emergencySavings;
                     }
                 }
-
-                console.log(increment);
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 6){
         monthTest.value = "June 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1026,28 +1159,43 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[4] * monthDiff), 10);
+                        for (var h = currentMonth; h < 5; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[4] * monthDiff), 10);
+                        for (var h = currentMonth; h < 5; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[4] * monthDiff), 10);
+                        for (var h = currentMonth; h < 5; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[4] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 5; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[4] * monthDiff), 10);
+                        for (var h = currentMonth; h < 5; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[4] * monthDiff), 10);
+                        for (var h = currentMonth; h < 5; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[4] * monthDiff), 10);
+                        for (var h = currentMonth; h < 5; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
 
                     console.log(increment);
 
@@ -1058,14 +1206,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 7){
         monthTest.value = "July 2022";
-
+        var month = parseInt((Month), 10);
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
         }
@@ -1093,28 +1241,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[5] * monthDiff), 10);
+                        for (var h = currentMonth; h < 6; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[5] * monthDiff), 10);
+                        for (var h = currentMonth; h < 6; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[5] * monthDiff), 10);
+                        for (var h = currentMonth; h < 6; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[5] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 6; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[5] * monthDiff), 10);
+                        for (var h = currentMonth; h < 6; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[5] * monthDiff), 10);
+                        for (var h = currentMonth; h < 6; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[5] * monthDiff), 10);
+                        for (var h = currentMonth; h < 6; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -1123,13 +1288,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 8){
         monthTest.value = "August 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1158,28 +1324,46 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[6] * monthDiff), 10);
+                        for (var h = currentMonth; h < 7; h++){
+                        increment += parseInt((SundayDays[h]));
+                        console.log(increment);
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[6] * monthDiff), 10);
+                        for (var h = currentMonth; h < 7; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[6] * monthDiff), 10);
+                        for (var h = currentMonth; h < 7; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[6] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 7; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[6] * monthDiff), 10);
+                        for (var h = currentMonth; h < 7; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[6] * monthDiff), 10);
+                        for (var h = currentMonth; h < 7; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[6] * monthDiff), 10);
+                        for (var h = currentMonth; h < 7; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -1188,13 +1372,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 9){
         monthTest.value = "September 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1223,28 +1408,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[7] * monthDiff), 10);
+                        for (var h = currentMonth; h < 8; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[7] * monthDiff), 10);
+                        for (var h = currentMonth; h < 8; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[7] * monthDiff), 10);
+                        for (var h = currentMonth; h < 8; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[7] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 8; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[7] * monthDiff), 10);
+                        for (var h = currentMonth; h < 8; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[7] * monthDiff), 10);
+                        for (var h = currentMonth; h < 8; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[7] * monthDiff), 10);
+                        for (var h = currentMonth; h < 8; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -1253,13 +1455,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 10){
         monthTest.value = "October 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1288,28 +1491,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[8] * monthDiff), 10);
+                        for (var h = currentMonth; h < 9; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[8] * monthDiff), 10);
+                        for (var h = currentMonth; h < 9; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[8] * monthDiff), 10);
+                        for (var h = currentMonth; h < 9; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[8] * monthDiff), 10);;
+                        for (var h = currentMonth; h < 9; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[8] * monthDiff), 10);
+                        for (var h = currentMonth; h < 9; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[8] * monthDiff), 10);
+                        for (var h = currentMonth; h < 9; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[8] * monthDiff), 10);
+                        for (var h = currentMonth; h < 9; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -1318,13 +1538,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 11){
         monthTest.value = "November 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1353,28 +1574,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[9] * monthDiff), 10);
+                        for (var h = currentMonth; h < 10; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -1383,13 +1621,14 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
 
     if (Month == 12){
         monthTest.value = "December 2022";
+        var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1418,28 +1657,45 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 if (monthDiff > 1){
-                    var increment = 1;
+                    var increment = parseInt((0), 10);
                     if (l == 0){
-                        increment = parseInt((SundayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
                     }
                     if (l == 1){
-                        increment = parseInt((MondayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
                     }
                     if (l == 2){
-                        increment = parseInt((TuesdayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
                     }
                     if (l == 3){
-                        increment = parseInt((WednesdayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
                     }
                     if (l == 4){
-                        increment = parseInt((ThursdayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
                     }
                     if (l == 5){
-                        increment = parseInt((FridayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
                     }
                     if (l == 6){
-                        increment = parseInt((SaturdayDays[10] * monthDiff), 10);
+                        for (var h = currentMonth; h < 11; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
                     }
+                 
+
+                    console.log(increment);
 
                     for (var o = 0; o < increment; o++){
                         updatedCheckings += weeklyUpdate;
@@ -1448,7 +1704,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
             }
         }
     }
@@ -1485,7 +1741,7 @@ function nextMonth(){
     globalMonth += 1;
 
     if (globalMonth == 13) {
-        globalMonth = 12;
+        globalMonth = currentMonth;
     }
 
     next = 1;
@@ -1512,11 +1768,7 @@ function lastMonth(){
     var weeklyExpenses = parseInt(document.getElementById("weekly-expenses").value, 10);
     var generalSavings =  parseInt(document.getElementById("general").value, 10);
     var emergencySavings = parseInt(document.getElementById("emergency").value, 10);
-
-    var updatedCheckings = checkings + ((weeklyIncome - weeklyExpenses) - (generalSavings + emergencySavings));
-    var weeklyUpdate = weeklyIncome - (weeklyExpenses + generalSavings + emergencySavings);
-    var updatedSavings = savings + generalSavings;
-    var updatedEmergency = emergencySavings;
+    
 
     var day1 = date[8];
     var day2 = date[9];
@@ -1534,20 +1786,25 @@ function lastMonth(){
     } else {
         currentDay = day1 + day2;
     }
+    
+    globalMonth -= 1;
 
-    if (globalMonth == currentMonth) {
+    if (globalMonth == currentMonth - 1) {
         globalMonth = parseInt((currentMonth),10);
     }
-    else {
-        globalMonth -= 1;
-        next = 1;
-    }
 
-    if(globalMonth == currentMonth){
-        next = 0;
-    }
 
-    
+    next = 1;
 
-    computeMonth(globalMonth, updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, currentDay, next);
+    var monthDiff = parseInt(globalMonth - currentMonth, 10);
+
+
+    var updatedCheckings = (checkings + ((weeklyIncome - weeklyExpenses) - (generalSavings + emergencySavings)));
+    var weeklyUpdate = (weeklyIncome - (weeklyExpenses + generalSavings + emergencySavings));
+    var updatedSavings = (savings + generalSavings);
+    var updatedEmergency = (emergencySavings);
+
+
+
+    computeMonth(globalMonth, updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, currentDay, next, monthDiff);
 }
