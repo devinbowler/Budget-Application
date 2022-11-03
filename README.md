@@ -1,2 +1,2 @@
 # Budget-Application
-This project is a static website meant for people to be able to track the growth of accounts based on income and expenses.
+This project is a static website meant for people to be able to track the growth of accounts based on income and expenses. This project expanded upon my javascript skills and enabled me to think outside the box without looking at outside sources of code. This application was made to represent my progress in front end development, and to also build a application I would personally utilize.
