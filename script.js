@@ -5,7 +5,6 @@ var monthTitle = document.getElementById("month");
 var firstTitle = document.getElementById("firstTitle");
 var arrow = document.getElementById("thick-arrow-down");
 var calc = document.getElementById("calculate");
-var reload = document.getElementById("reload");
 
 
 var number1 = document.getElementById('num1');
@@ -283,7 +282,6 @@ function compute() {
     firstTitle.style.display = 'none';
     arrow.style.display = 'none';
     calc.style.display = 'none';
-    reload.style.display = 'block';
 
     var month1, month2, day1, day2;
 
