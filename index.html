@@ -102,6 +102,14 @@
         <button onclick="compute()" type="button" id="compute">Calculate</button>
     </div>
 
+    <button id="reload" onClick="window.location.reload();">New Budget</button>
+
+    <div id="firstTitle">
+        Budget Application
+    </div>
+
+    <div id="thick-arrow-down"></div>
+
     <form id="month">
         <textarea id="monthTest" readonly>Budget Application</textarea>
     </form>
@@ -109,7 +117,8 @@
     <button onclick="nextMonth()" type="button" id="arrowRight"></button>
     <button onclick="lastMonth()" type="button" id="arrowLeft"></button>
 
-    <div class="grid-container">
+
+    <div id="grid-container">
         <div id="day1"><textarea readonly id="num1"></textarea></div>
         <div id="day2"><textarea readonly id="num2"></textarea></div>
         <div id="day3"><textarea readonly id="num3"></textarea></div>  
@@ -153,6 +162,7 @@
         <div id="day41"><textarea readonly id="num41"></textarea></div>
         <div id="day42"><textarea readonly id="num42"></textarea></div>
       </div>
+
 </div>
 
 

@@ -1,5 +1,11 @@
-var overlay = document.getElementById("inputOverlay");
+ var overlay = document.getElementById("inputOverlay");
 var monthTest = document.getElementById("monthTest");
+var calendarBody = document.getElementById("grid-container");
+var monthTitle = document.getElementById("month");
+var firstTitle = document.getElementById("firstTitle");
+var arrow = document.getElementById("thick-arrow-down");
+var calc = document.getElementById("calculate");
+var reload = document.getElementById("reload");
 
 
 var number1 = document.getElementById('num1');
@@ -215,6 +221,21 @@ var FridayDays = [4, 4, 4, 5, 4, 4, 5, 4, 5, 4, 4, 5];
 var SaturdayDays = [5, 4, 4, 5, 4, 4, 5, 4, 4, 5, 4, 5];
 
 
+var JanWeeks = [0, 0, 0, 0, 0, 0, 1];
+var FebWeeks = [0, 0, 1, 1, 1, 1, 1];
+var MarWeeks = [0, 0, 1, 1, 1, 1, 1];
+var AprWeeks = [0, 0, 0, 0, 0, 1, 1];
+var MayWeeks = [1, 1, 1, 1, 1, 1, 1];
+var JuneWeeks = [0, 0, 0, 1, 1, 1, 1];
+var JulyWeeks = [0, 0, 0, 0, 0, 1, 1];
+var AugWeeks = [0, 1, 1, 1, 1, 1, 1];
+var SeptWeeks = [0, 0, 0, 0, 1, 1, 1];
+var OctWeeks = [0, 0, 0, 0, 0, 0, 1];
+var NovWeeks = [0, 0, 1, 1, 1, 1, 1];
+var DecWeeks = [0, 0, 0, 0, 1, 1, 1];
+
+
+
 
 
 function openOverlay() {
@@ -256,6 +277,13 @@ function compute() {
 
     leftArrow.style.visibility = 'visible';
     rightArrow.style.visibility = 'visible';
+    calendarBody.style.visibility = 'visible';
+    calendarBody.style.top = '-700px';
+    monthTitle.style.visibility = 'visible';
+    firstTitle.style.display = 'none';
+    arrow.style.display = 'none';
+    calc.style.display = 'none';
+    reload.style.display = 'block';
 
     var month1, month2, day1, day2;
 
@@ -282,7 +310,7 @@ function compute() {
     computeMonth(currentMonth, updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, currentDay, next);
 }
 
-function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmergency, emergency, weekUpdate, Day, daysIndex, weekdaysNum, boolean, monthDiff, month) {
+function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmergency, emergency, weekUpdate, Day, daysIndex, weekdaysNum, boolean, monthDiff, month, WeekStart) {
     switch (SelectedDay) {
         case "sunday":
             var i = 6;
@@ -314,8 +342,31 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (SundayDays[currentMonth - 1] - firstI);
+                if (SundayDays[currentMonth - 1] >= firstI){
+                    if (SundayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((SundayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (SundayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((SundayDays[currentMonth - 1] - firstI));
+                    }
+                    if (SundayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (SundayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (SundayDays[currentMonth - 1] <= firstI){
+                    if (TuesdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - SundayDays[currentMonth - 1]) + 1);
+                    }
+                    if (SundayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - SundayDays[currentMonth - 1]));
+                    }
+                    if (SundayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - SundayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
+
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
 
 
 
@@ -385,8 +436,31 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (MondayDays[currentMonth - 1] - firstI);
+                if (MondayDays[currentMonth - 1] >= firstI){
+                    if (MondayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((MondayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (MondayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((MondayDays[currentMonth - 1] - firstI));
+                    }
+                    if (MondayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (MondayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (MondayDays[currentMonth - 1] <= firstI){
+                    if (TuesdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - MondayDays[currentMonth - 1]) + 1);
+                    }
+                    if (MondayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - MondayDays[currentMonth - 1]));
+                    }
+                    if (MondayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - MondayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
+
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
 
 
 
@@ -452,10 +526,31 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (TuesdayDays[currentMonth - 1] - firstI);
+                if (TuesdayDays[currentMonth - 1] >= firstI){
+                    if (TuesdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((TuesdayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (TuesdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((TuesdayDays[currentMonth - 1] - firstI));
+                    }
+                    if (TuesdayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (TuesdayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (TuesdayDays[currentMonth - 1] <= firstI){
+                    if (TuesdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - TuesdayDays[currentMonth - 1]) + 1);
+                    }
+                    if (TuesdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - TuesdayDays[currentMonth - 1]));
+                    }
+                    if (TuesdayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - TuesdayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
 
-            console.log(currentMonth, firstIncrement, firstI, i);
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
 
 
 
@@ -520,8 +615,31 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (WednesdayDays[currentMonth - 1] - firstI);
+                if (WednesdayDays[currentMonth - 1] >= firstI){
+                    if (WednesdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((WednesdayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (WednesdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((WednesdayDays[currentMonth - 1] - firstI));
+                    }
+                    if (WednesdayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (WednesdayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (WednesdayDays[currentMonth - 1] <= firstI){
+                    if (WednesdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - WednesdayDays[currentMonth - 1]) + 1);
+                    }
+                    if (WednesdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - WednesdayDays[currentMonth - 1]));
+                    }
+                    if (WednesdayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - WednesdayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
+
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
 
 
 
@@ -587,8 +705,32 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (ThursdayDays[currentMonth - 1] - firstI);
+                if (ThursdayDays[currentMonth - 1] >= firstI){
+                    if (ThursdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((ThursdayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (ThursdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((ThursdayDays[currentMonth - 1] - firstI));
+                    }
+                    if (ThursdayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (ThursdayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (ThursdayDays[currentMonth - 1] <= firstI){
+                    if (ThursdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - ThursdayDays[currentMonth - 1]) + 1);
+                    }
+                    if (ThursdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - ThursdayDays[currentMonth - 1]));
+                    }
+                    if (ThursdayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - ThursdayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
+
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
+
 
 
 
@@ -653,9 +795,31 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (FridayDays[currentMonth - 1] - firstI);
+                if (FridayDays[currentMonth - 1] >= firstI){
+                    if (FridayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((FridayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (FridayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((FridayDays[currentMonth - 1] - firstI));
+                    }
+                    if (FridayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (FridayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (FridayDays[currentMonth - 1] <= firstI){
+                    if (FridayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - FridayDays[currentMonth - 1]) + 1);
+                    }
+                    if (FridayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - FridayDays[currentMonth - 1]));
+                    }
+                    if (FridayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - FridayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
 
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
 
 
             if (boolean == 1 && currentMonth != globalMonth) {
@@ -719,8 +883,31 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
             }
 
             if (boolean == 0){
-                firstIncrement = (SaturdayDays[currentMonth - 1] - firstI);
+                if (SaturdayDays[currentMonth - 1] >= firstI){
+                    if (SaturdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((SaturdayDays[currentMonth - 1] - firstI) + 1);
+                    }
+                    if (SaturdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((SaturdayDays[currentMonth - 1] - firstI));
+                    }
+                    if (SaturdayDays[currentMonth - 1] == 5) {
+                        firstIncrement = (SaturdayDays[currentMonth - 1] - firstI);
+                        }
+                } else if (SaturdayDays[currentMonth - 1] <= firstI){
+                    if (SaturdayDays[currentMonth - 1] == 4 && WeekStart == 0) {
+                        firstIncrement = ((firstI - SaturdayDays[currentMonth - 1]) + 1);
+                    }
+                    if (SaturdayDays[currentMonth - 1] == 4 && WeekStart == 1) {
+                        firstIncrement = ((firstI - SaturdayDays[currentMonth - 1]));
+                    }
+                    if (SaturdayDays[currentMonth - 1] == 5) {
+                    firstIncrement = (firstI - SaturdayDays[currentMonth - 1]);
+                    }
+                }
+                
             }
+
+            console.log(TuesdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i, WeekStart);
 
 
 
@@ -732,7 +919,6 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
                 }
             }
 
-            console.log(SaturdayDays[currentMonth - 1], currentMonth, firstIncrement, firstI, i);
     
             if(document.getElementById('weekly').checked){
                 for (i; i < 6; i++){
@@ -781,6 +967,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = JanWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 7){
                     var newI = 1;
@@ -789,7 +976,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     newI = 0;
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, month, WeekStart);
             }
         }
     }
@@ -817,6 +1004,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = FebWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 3){
                     var newI = 1;
@@ -872,7 +1060,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -900,6 +1088,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = MarWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 3){
                     var newI = 1;
@@ -959,7 +1148,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -987,6 +1176,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = AprWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 6){
                     var newI = 1;
@@ -1043,7 +1233,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1071,6 +1261,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = MayWeeks[l];
                 var weekdayNum = l + 1;
                 var newI = 0;
                 
@@ -1122,7 +1313,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1151,6 +1342,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = JuneWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 4){
                     var newI = 1;
@@ -1206,7 +1398,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1233,6 +1425,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = JulyWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 6){
                     var newI = 1;
@@ -1288,7 +1481,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1316,6 +1509,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = AugWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 2){
                     var newI = 1;
@@ -1372,7 +1566,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1400,6 +1594,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = SeptWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 5){
                     var newI = 1;
@@ -1455,7 +1650,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1483,6 +1678,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = OctWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 7){
                     var newI = 1;
@@ -1538,7 +1734,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1566,6 +1762,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = NovWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 3){
                     var newI = 1;
@@ -1621,7 +1818,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
@@ -1649,6 +1846,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
 
         for (var l = 0; l < payDay.length; l++){
             if (document.getElementById(payDay[l]).checked){
+                var WeekStart = DecWeeks[l];
                 var weekdayNum = l + 1;
                 if (weekdayNum < 5){
                     var newI = 1;
@@ -1704,7 +1902,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
                     }
                 }
                 
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month);
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }

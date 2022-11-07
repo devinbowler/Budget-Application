@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&family=Rubik:wght@300&display=swap');
+
 * {
     overflow: hidden;
+    font-family: 'Rubik', sans-serif;
 }
 
 .container {
@@ -29,7 +32,7 @@
     background-color: #2c2e31;
     height: 800px;
     width: 400px;
-    top: -1000px;
+    top: -1045px;
     border-radius: 50px;
     margin: 0 auto;
     z-index: 10;
@@ -151,6 +154,54 @@
     border: 1px solid black;
 }
 
+#compute:hover {
+    cursor: pointer;
+}
+
+#firstTitle {
+    position: absolute;
+    font-family: 'Pacifico', cursive;
+    font-size: 125px;
+    letter-spacing: 1px;
+    text-align: center;
+    width: 1500px;
+    height: 250px;
+    background: transparent;
+    border: none;
+    color: beige;
+    resize: none;
+    top: 300px;
+    left: 215px;
+}
+
+#thick-arrow-down {
+    position: absolute;
+    background-color: transparent;
+    left: 945px;
+    width: 25px;
+    height: 25px;
+    border: 10px solid beige;
+    border-left: 0;
+    border-top: 0;
+  
+    animation: moveDown 2s linear infinite;
+  }
+
+  @-webkit-keyframes moveDown {
+    0% {
+      top: 675px;
+      transform: rotate(45deg);
+    }
+    50% {
+      top: 750px;
+      transform: rotate(45deg);
+    }
+    100% {
+      top: 675px;
+      transform: rotate(45deg);
+    }
+  }
+
 fieldset {
     position: relative;
     width: 325px;
@@ -183,6 +234,7 @@ input[type="number"]:focus {
 input[type="number"] {
     float: right;
     background: #393d44;
+    color: beige;
     border: none;
     border: .1px solid rgb(0, 0, 0);
     padding: 4px;
@@ -213,22 +265,56 @@ input[type="radio"]:focus {
     left: 560px;
 }
 
+#month {
+    visibility: hidden;
+}
+
+
+
 
 #calculate {
     position: relative;
     width: 250px;
     height: 50px;
-    top: 900px;
+    top: 875px;
     border-radius: 15px;
-    background:#393d44;
+    background:#282b30;
+    font-size: 20px;
     color: beige;
-    border: none;
     display: block;
     margin: 0 auto;
-    border: 1px solid black;
+    border: none;
+    transition: all .5s;
 }
 
-.grid-container {
+#calculate:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#reload {
+    position: absolute;
+    width: 250px;
+    height: 50px;
+    top: 15px;
+    left: 1650px;
+    border-radius: 15px;
+    background:#282b30;
+    font-size: 20px;
+    color: beige;
+    display: block;
+    margin: 0 auto;
+    border: .1px solid beige;
+    transition: all .5s;
+    display: none;
+}
+
+#reload:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#grid-container {
     position: relative;
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
@@ -239,10 +325,11 @@ input[type="radio"]:focus {
     height: 800px;
     margin: 0 auto;
     top: -785px;
+    visibility: hidden;
 }
 
 
-.grid-container>div {
+#grid-container>div {
     position: relative;
     background-color: #393d44;
     border: 1px solid black;
@@ -251,7 +338,7 @@ input[type="radio"]:focus {
     transition: 0.2s ease;
 }
 
-.grid-container>div textarea {
+#grid-container>div textarea {
     position: relative;
     text-align: center;
     top: 3%;
