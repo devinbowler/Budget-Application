@@ -1984,7 +1984,7 @@ function nextMonth(){
     globalMonth += 1;
 
     if (globalMonth == 13) {
-        globalMonth = currentMonth;
+        globalMonth = 12;
     }
 
     next = 1;
