@@ -967,14 +967,61 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
             if (document.getElementById(payDay[l]).checked){
                 var WeekStart = JanWeeks[l];
                 var weekdayNum = l + 1;
-                if (weekdayNum < 7){
+                if (weekdayNum < 3){
                     var newI = 1;
                 }
-                else if (weekdayNum > 6) {
+                else if (weekdayNum > 2) {
                     newI = 0;
                 }
-                
-                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, month, WeekStart);
+                if (monthDiff > 1){
+                    var increment = parseInt((0), 10);
+                    if (l == 0){
+                        for (var h = currentMonth; h < 0; h++){
+                        increment += parseInt((SundayDays[h]));
+                    } 
+                    }
+                    if (l == 1){
+                        for (var h = currentMonth; h < 0; h++){
+                            increment += parseInt((MondayDays[h]));
+                        }
+                    }
+                    if (l == 2){
+                        for (var h = currentMonth; h < 0; h++){
+                            increment += parseInt((TuesdayDays[h]));
+                        }
+                    }
+                    if (l == 3){
+                        for (var h = currentMonth; h < 0; h++){
+                            increment += parseInt((WednesdayDays[h]));
+                        }
+                    }
+                    if (l == 4){
+                        for (var h = currentMonth; h < 0; h++){
+                            increment += parseInt((ThursdayDays[h]));
+                        }
+                    }
+                    if (l == 5){
+                        for (var h = currentMonth; h < 0; h++){
+                            increment += parseInt((FridayDays[h]));
+                        }
+                    }
+                    if (l == 6){
+                        for (var h = currentMonth; h < 0; h++){
+                            increment += parseInt((SaturdayDays[h]));
+                        }
+                    }
+                 
+
+                    console.log(increment);
+
+                    for (var o = 0; o < increment; o++){
+                        updatedCheckings += weeklyUpdate;
+                        updatedSavings += generalSavings;
+                        updatedEmergency += emergencySavings;
+                    }
+                }
+               
+                CalendarPrint(payDay[l], updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, dayIndex, newI, boolean, monthDiff, month, WeekStart);
             }
         }
     }
