@@ -94,89 +94,89 @@ var day40 = document.getElementById('day40');
 var day41 = document.getElementById('day41');
 var day42 = document.getElementById('day42');
 
-var January = [0, 0, 0, 0, 0, 0, 1, 
-               2, 3, 4, 5, 6, 7, 8, 
-               9, 10, 11, 12, 13, 14, 15,
-               16, 17, 18, 19, 20, 21, 22, 
-               23, 24, 25 ,26, 27, 28, 29, 
-               30, 31, 0, 0, 0, 0, 0];
+var January = [1, 2, 3, 4, 5, 6, 7, 
+               8, 9, 10, 11, 12, 13, 14, 
+               15, 16, 17, 18, 19, 20, 21,
+               22, 23, 24, 25, 26, 27, 28, 
+               29, 30, 31 ,0, 0, 0, 0, 
+               0, 0, 0, 0, 0, 0, 0];
 
-var Febuary = [0, 0, 1, 2, 3, 4, 5,
+var Febuary = [0, 0, 0, 1, 2, 3, 4, 5,
                6, 7, 8, 9, 10, 11, 12,
                13, 14, 15, 16, 17, 18, 19,
                20, 21, 22, 23, 24, 25 ,26,
                27, 28, 0, 0, 0, 0, 0,
-               0, 0, 0, 0, 0, 0, 0];
+               0, 0, 0, 0, 0, 0];
 
-var March = [0, 0, 1, 2, 3, 4, 5,
+var March = [0, 0, 0, 1, 2, 3, 4, 5,
              6, 7, 8, 9, 10, 11, 12,
              13, 14, 15,16, 17, 18, 19,
              20, 21, 22, 23, 24, 25 ,26,
              27, 28, 29, 30, 31, 0 ,0,
-             0, 0, 0, 0, 0, 0, 0];
+             0, 0, 0, 0, 0, 0];
 
-var April = [0, 0, 0, 0, 0, 1, 2,
+var April = [0, 0, 0, 0, 0, 0, 1, 2,
              3, 4, 5, 6, 7, 8, 9,
              10, 11, 12, 13, 14, 15, 16,
              17, 18, 19, 20, 21, 22, 23,
              24, 25 ,26, 27, 28, 29, 30,
-             0, 0, 0, 0, 0, 0 ,0];
+             0, 0, 0, 0, 0, 0];
 
-var May = [1, 2, 3, 4, 5, 6, 7,
+var May = [0, 1, 2, 3, 4, 5, 6, 7,
            8, 9, 10, 11, 12, 13, 14,
            15,16, 17, 18, 19, 20, 21,
            22, 23, 24, 25 ,26, 27, 28,
            29, 30, 31, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0];
+           0, 0, 0, 0, 0, 0];
 
-var June = [0, 0, 0, 1, 2, 3, 4,
+var June = [0, 0, 0, 0, 1, 2, 3, 4,
             5, 6, 7, 8, 9, 10, 11,
             12, 13, 14, 15, 16, 17, 18,
             19, 20, 21, 22, 23,24, 25,
             26, 27, 28, 29, 30, 0, 0,
-            0, 0, 0, 0,0, 0, 0];
+            0, 0, 0, 0,0, 0];
 
-var July = [0, 0, 0, 0, 0, 1, 
+var July = [0, 0, 0, 0, 0, 0, 1, 
             2, 3, 4, 5, 6, 7, 8,
             9, 10, 11, 12, 13, 14, 15,
             16, 17, 18, 19, 20, 21, 22,
             23, 24, 25 ,26, 27, 28, 29, 
-            30, 31, 0, 0, 0, 0, 0, 0];
+            30, 31, 0, 0, 0, 0, 0];
 
-var August = [0, 1, 2, 3, 4, 5, 6,
+var August = [0, 0, 1, 2, 3, 4, 5, 6,
               7, 8, 9, 10, 11, 12, 13,
               14, 15, 16, 17, 18, 19, 20,
               21, 22, 23, 24, 25 ,26, 27,
               28, 29, 30, 31, 0, 0, 0,
-              0, 0, 0, 0, 0, 0, 0];
+              0, 0, 0, 0, 0, 0];
 
-var September = [0, 0, 0, 0, 1, 2, 3,
+var September = [0, 0, 0, 0, 0, 1, 2, 3,
                  4, 5, 6, 7, 8, 9, 10,
                 11, 12, 13, 14, 15, 16, 17,
                 18, 19, 20, 21, 22, 23, 24,
                 25 ,26, 27, 28, 29, 30, 0,
-                0, 0, 0, 0, 0, 0, 0];
+                0, 0, 0, 0, 0, 0];
 
-var October = [0, 0, 0, 0, 0, 0, 1,
+var October = [0, 0, 0, 0, 0, 0, 0, 1,
                2, 3, 4, 5, 6, 7, 8,
                9, 10, 11, 12, 13, 14, 15,
                16, 17, 18, 19, 20, 21, 22,
                23, 24, 25 ,26, 27, 28, 29,
-               30, 31, 0, 0, 0, 0, 0];
+               30, 31, 0, 0, 0, 0];
 
-var November = [0, 0, 1, 2, 3, 4, 5,
+var November = [0, 0, 0, 1, 2, 3, 4, 5,
                 6, 7, 8, 9, 10, 11, 12,
                 13, 14, 15,16, 17, 18, 19,
                 20, 21, 22, 23, 24, 25 ,26,
                 27, 28, 29, 30, 0, 0 ,0,
-                0, 0, 0, 0, 0, 0, 0];
+                0, 0, 0, 0, 0, 0];
 
-var December = [0, 0, 0, 0, 1, 2, 3,
+var December = [0, 0, 0, 0, 0, 1, 2, 3,
                 4, 5, 6, 7, 8, 9, 10,
                 11, 12, 13, 14, 15, 16, 17,
                 18, 19, 20, 21, 22, 23, 24,
                 25 ,26, 27, 28, 29, 30, 31,
-                0, 0, 0, 0, 0, 0, 0];
+                0, 0, 0, 0, 0, 0];
 
 var days = [number1, number2, number3, number4, number5, number6, number7,
             number8, number9, number10, number11, number12, number13, number14,
@@ -943,7 +943,7 @@ function CalendarPrint(SelectedDay, newCheckings, newSavings, savings, newEmerge
 
 function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, emergencySavings, updatedEmergency, weeklyUpdate, Day, boolean, monthDiff){
     if (Month == 1){
-        monthTest.value = "January 2022";
+        monthTest.value = "January 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1027,7 +1027,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 2){
-        monthTest.value = "Febuary 2022";
+        monthTest.value = "Febuary 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1111,7 +1111,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 3){
-        monthTest.value = "March 2022";
+        monthTest.value = "March 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1199,7 +1199,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 4){
-        monthTest.value = "April 2022";
+        monthTest.value = "April 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1284,7 +1284,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 5){
-        monthTest.value = "May 2022";
+        monthTest.value = "May 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1364,7 +1364,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 6){
-        monthTest.value = "June 2022";
+        monthTest.value = "June 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1449,7 +1449,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 7){
-        monthTest.value = "July 2022";
+        monthTest.value = "July 2023";
         var month = parseInt((Month), 10);
         for (var k = 0; k < calendar.length; k++){
             calendar[k].style.visibility = 'visible';
@@ -1532,7 +1532,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 8){
-        monthTest.value = "August 2022";
+        monthTest.value = "August 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1617,7 +1617,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 9){
-        monthTest.value = "September 2022";
+        monthTest.value = "September 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1701,7 +1701,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 10){
-        monthTest.value = "October 2022";
+        monthTest.value = "October 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1785,7 +1785,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 11){
-        monthTest.value = "November 2022";
+        monthTest.value = "November 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
@@ -1869,7 +1869,7 @@ function computeMonth(Month, updatedCheckings, updatedSavings, generalSavings, e
     }
 
     if (Month == 12){
-        monthTest.value = "December 2022";
+        monthTest.value = "December 2023";
         var month = parseInt((Month), 10);
 
         for (var k = 0; k < calendar.length; k++){
